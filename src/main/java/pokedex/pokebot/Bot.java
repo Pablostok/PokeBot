@@ -6,22 +6,9 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.meta.generics.UpdatesReader;
 
+import pokedex.pokebot.Constants;
+
 public class Bot extends TelegramLongPollingBot{
-	
-	public static String MENU_INICIAL = "Bienvenid@ al menu:\n"
-			+ "\n"
-			+ "a) Consultar mi cita\n"
-			+ "	a.1) Consultar cita por identificador\n"
-			+ "	\n"
-			+ "b) agendar nueva cita\n"
-			+ "	b.0) elegir un servicio de los disponibles\n"
-			+ "	b.1) elegir un dia de los disponibles\n"
-			+ "	b.2) elegir una hora de las disponibles\n"
-			+ "	b.3) resumen y confirmación\n"
-			+ "\n"
-			+ "c) listar servicios y precios";
-	
-	public static String MENSAJE_POR_DEFECTO = "Comando no encontrado";
 	
 	@Override
 	public void onUpdateReceived(Update update) {
@@ -51,11 +38,24 @@ public class Bot extends TelegramLongPollingBot{
 		
 		switch(mensaje) {
 			case "MENU":
-				respuesta.setText(MENU_INICIAL);
+				respuesta.setText(Constants.MENU_INICIAL);
 				break;
-			
+			case "1":
+				//TO-DO
+				break;
+			case "2":
+				respuesta.setText(Constants.LISTADO_COMANDO_SERVICIOS);
+				break;
+			case "3":
+				respuesta.setText(Constants.SERVICIOS_PRECIOS);
+				break;
+			case "SERVICIO 1":
+				respuesta.setText(Constants.SERVICIO1_PASO1);
+				break;
+			case "":
+				break;
 			default:
-				respuesta.setText(MENSAJE_POR_DEFECTO);
+				respuesta.setText(Constants.MENSAJE_POR_DEFECTO);
 		}
 		return respuesta;
 	}
@@ -67,4 +67,5 @@ public class Bot extends TelegramLongPollingBot{
 			e.printStackTrace();
 		}
 	}
+	
 }
